@@ -24,6 +24,7 @@ void draw()
 {
   background(0);
   dunGetFlicked.didBonk(flickitizer);
+  //dunGetFlicked.didBonk(new PVector(mouseX, mouseY));
   flickitizer.updateAndDisplay(new PVector(mouseX, mouseY));
   dunGetFlicked.display();
   println(dunGetFlicked.bonkStatus());

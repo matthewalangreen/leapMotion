@@ -20,12 +20,29 @@ class Ball
   // methods
   void didBonk(Ball otherBall)
   {
-   float delta = 3;
+   float delta = 0.2;
    PVector me = this.position;
    PVector you = otherBall.position();
    
    // if otherBall.radius() this.radius()
    float hitDistance = otherBall.radius() + this. radius();
+   float d = me.dist(you);
+   if(d < hitDistance) // distance between us is less than your radius + my radius
+   {
+     this.bonking = true;
+   }  else {
+     this.bonking = false;
+   }  
+  }
+  
+   void didBonk(PVector otherObjectPosition)
+  {
+   float delta = 0.2;
+   PVector me = this.position;
+   PVector you = otherObjectPosition;
+   
+   // if otherBall.radius() this.radius()
+   float hitDistance = this.radius();
    float d = me.dist(you);
    if(d < hitDistance) // distance between us is less than your radius + my radius
    {
