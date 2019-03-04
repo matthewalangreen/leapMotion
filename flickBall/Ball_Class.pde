@@ -4,6 +4,8 @@ class Ball
   color c; 
   float diameter;
   PVector position;
+  float radius;
+  boolean bonking;
   
   // constructor
   // xPos, yPos, color, diameter
@@ -11,23 +13,26 @@ class Ball
     c = _c;
     diameter = _diameter;
     position = new PVector(_xPos, _yPos);
-    
+    radius = diameter/2;
+    bonking = false;
     }
   
   // methods
-  boolean didBonk(Ball otherBall)
+  void didBonk(Ball otherBall)
   {
-   float delta = 0.2;
-   boolean temp = false;
+   float delta = 3;
    PVector me = this.position;
-   PVector you = otherBall.getPosition();
-   if(abs(me.x - you.x)<delta)
+   PVector you = otherBall.position();
+   
+   // if otherBall.radius() this.radius()
+   float hitDistance = otherBall.radius() + this. radius();
+   float d = me.dist(you);
+   if(d < hitDistance) // distance between us is less than your radius + my radius
    {
-    temp = true; 
-    this.c = color(255,255,255);
-   }
-
-   return temp;
+     this.bonking = true;
+   }  else {
+     this.bonking = false;
+   }  
   }
   
   void reset()
@@ -40,15 +45,31 @@ class Ball
     position = newPos;
   }
   
-  PVector getPosition()
+  PVector position()
   {
    return this.position; 
+  }
+  
+  float radius()
+  {
+   return this.radius; 
+  }
+  
+  boolean bonkStatus()
+  {
+   return this.bonking; 
   }
   
   void display()
   {
    noStroke();
-   fill(c);
+   if(this.bonking)
+   {
+     fill(255,255,255);
+   } else {
+     fill(c);
+   }
+   
    ellipseMode(CENTER);
    ellipse(position.x,position.y,diameter, diameter);
   }

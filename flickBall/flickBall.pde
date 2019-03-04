@@ -2,7 +2,8 @@ Ball flickitizer;
 Ball dunGetFlicked;
 color myColor;
 color otherColor;
-int myDiameter = 100;
+int largeDiameter = 100;
+int smallDiameter = 70;
 
 void setup()
 {
@@ -14,17 +15,18 @@ void setup()
   myColor = color(random(100,255),0,0);
   otherColor = color(0,0,random(100,255));
   // xPos, yPos, color, diameter
-  flickitizer = new Ball(width/2, height/2, myColor, myDiameter);
-  dunGetFlicked = new Ball(width/2, height/2, otherColor, myDiameter);
+  flickitizer = new Ball(width/2, height/2, myColor, smallDiameter);
+  dunGetFlicked = new Ball(width/2, height/2, otherColor, largeDiameter);
 }
 
 
 void draw() 
 {
   background(0);
+  dunGetFlicked.didBonk(flickitizer);
   flickitizer.updateAndDisplay(new PVector(mouseX, mouseY));
   dunGetFlicked.display();
-  println(dunGetFlicked.didBonk(flickitizer));
+  println(dunGetFlicked.bonkStatus());
 }
 
 
