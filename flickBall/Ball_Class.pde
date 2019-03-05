@@ -83,7 +83,10 @@ class Ball
    if(this.bonking)
    {
      fill(255,255,255);
+     strokeWeight(2);
+     stroke(255,0,0);
    } else {
+     noStroke();
      fill(c);
    }
    
